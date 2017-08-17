@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include views/head.ejs%>
+    <%-stylesheets%>
+
+     <link rel="stylesheet" type="text/css" href="/css/app.css">
+</head>
+
+<body ng-app="questionnaire">
+<% include views/header.ejs%>
+
+<!-- Insert Body here -->
+<div class="container">
+
+   <%- body %>
+
+</div><!-- /.container -->
+
+<% include views/footer.ejs%>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/bootstrap-slider.min.js"></script>
+<script src="lib/angular.min.js"> </script>
+<script src="../modules/questionnaire/app.js"></script>
+
+<%-scripts%>
+</body>
+</html>

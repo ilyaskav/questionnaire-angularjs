@@ -8,21 +8,25 @@
 </head>
 
 <body ng-app="questionnaire">
-<% include views/header.ejs%>
+    <div ng-controller="MainController">
+        <% include views/header.ejs%>
 
-<!-- Insert Body here -->
-<div class="container">
+        <!-- Insert Body here -->
+        <div class="container">
+            <div ng-view></div>
 
-   <%- body %>
+        </div>
 
-</div><!-- /.container -->
-
-<% include views/footer.ejs%>
-
+        <% include views/footer.ejs%>
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/bootstrap-slider.min.js"></script>
 <script src="lib/angular.min.js"> </script>
-<script src="../modules/questionnaire/app.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+
+<script src="questionnaire/app.js"></script>
+<script src="questionnaire/controllers/main.controller.js"></script>
+<script src="questionnaire/controllers/questionnaire.controller.js"></script>
 
 <%-scripts%>
 </body>

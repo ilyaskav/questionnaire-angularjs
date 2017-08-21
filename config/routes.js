@@ -19,7 +19,6 @@ module.exports = function(app) {
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(expressValidator()); // this line must be immediately after any of the bodyParser middlewares! 
     app.use(express.static('public'));
-    app.use(express.static('modules'));
     app.use(logger);
 
 
@@ -31,20 +30,21 @@ module.exports = function(app) {
     //     response.render('form', { title: 'Brandply questionnaire: answer the questions' });
     // });
 
-    app.post('/submitForm', submitForm);
+    app.post('/api/submitForm', submitForm);
 
-    // app.get('/results', viewResult);
+    app.get('/api/results', viewResult);
 
-    app.get('/tests', function(req, res) {
-        response.render('index', { title: 'Brandply questionnaire' });
-    });
+    // app.get('/api/tests', function(req, res) {
+    //     response.render('index', { title: 'Brandply questionnaire' });
+    // });
 
     // app.use(function(req, res, next) {
     //     res.render('err/404', { title: 'Page was not found' });
     // });
+    app.use(express.static('modules'));
 
-    app.get('*', function(req, res) {
-        response.render('index', { title: 'Brandply questionnaire' });
+    app.route('/*').get((req, res) =>{
+        res.render('index', { title: 'Brandply questionnaire' });
     });
 
     app.use(exHandler);

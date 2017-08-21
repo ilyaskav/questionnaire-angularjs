@@ -1,5 +1,7 @@
 angular.module('questionnaire')
-    .controller('MainController', ['$scope', '$http',
-        function($scope, $http) {
-
+    .controller('MainController', ['$scope', '$location',
+        function($scope, $location) {
+            $scope.isActive = function(path){
+                return path === $location.path();
+            }
         }]);

@@ -7,18 +7,18 @@
 </div>
 
 <h2>BrandPly Questionnaire</h2>
-<form id="questionnaireForm">
+<form id="questionnaireForm" ng-submit="submit()" name="questionnaireForm">
     <div class="form-group" id="sprintStatus"> </div>
 
     <div class="form-group">
         <label for="codeQuality">Code quality</label> <br />
         <input id="codeQuality" type="text" name="codeQuality" data-provide="slider" data-slider-ticks="[1, 10]" data-slider-ticks-labels='["low", "high"]'
-            data-slider-min="1" data-slider-max="10" data-slider-step="1" data-slider-value="10" data-slider-tooltip="hide" />
+            data-slider-min="1" data-slider-max="10" data-slider-step="1" data-slider-value="10" data-slider-tooltip="hide" ng-model="formData.codeQuality" />
     </div>
 
     <div class="form-group">
         <label for="bestDev">The best developer</label>
-        <select name="bestDev" id="bestDev" class="form-control" required>
+        <select name="bestDev" id="bestDev" class="form-control" required ng-model="formData.bestDev">
             <option value="" selected>Select dev</option>
             <option value="Eugene Novikov">Eugene Novikov</option>
             <option value="Nikita Evdokimenko">Nikita Evdokimenko</option>
@@ -27,17 +27,17 @@
 
     <div class="form-group">
         <label for="suggestions">Suggestions</label>
-        <textarea name="suggestions" id="suggestions" class="form-control" rows="3" required></textarea>
+        <textarea name="suggestions" id="suggestions" class="form-control" rows="3" required ng-model="formData.suggestions"></textarea>
     </div>
 
     <div class="form-group">
         <label for="lengthOfSprint"> Length of sprint </label>
-        <input type="number" name="lengthOfSprint" id="lengthOfSprint" class="form-control" required/>
+        <input type="number" name="lengthOfSprint" id="lengthOfSprint" class="form-control" required ng-model="formData.lengthOfSprint" />
     </div>
 
     <div class="form-group">
         <label for="name">Your name </label>
-        <input type="text" name="name" id="name" class="form-control" required />
+        <input type="text" name="name" id="name" class="form-control" required ng-model="formData.name" />
     </div>
 
     <p class="text-warning"><strong>All fields are required.</strong></p>

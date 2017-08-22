@@ -22,21 +22,13 @@ module.exports = function(app) {
     app.use(logger);
 
 
-    // app.get('/', function(request, response) {
-    //     response.render('index', { title: 'Brandply questionnaire' });
-    // });
-
-    // app.get('/form', function(request, response) {
-    //     response.render('form', { title: 'Brandply questionnaire: answer the questions' });
-    // });
-
     app.route('/api/submitForm').post(submitForm);
 
-    app.get('/api/results', viewResult);
+    app.route('/api/results').get(viewResult);
 
-    // app.get('/api/tests', function(req, res) {
-    //     response.render('index', { title: 'Brandply questionnaire' });
-    // });
+    app.route('/tests').get(function(req, res) {
+        res.sendFile(path.resolve('public/SpecRunner.html'));
+    });
 
     // app.use(function(req, res, next) {
     //     res.render('err/404', { title: 'Page was not found' });

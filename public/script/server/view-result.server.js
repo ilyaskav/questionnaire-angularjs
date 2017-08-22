@@ -12,12 +12,7 @@ module.exports = (req, res, next) => {
                 item.date = moment(item.date).format('MMMM Do YYYY, h:mm:ss a');
             });
 
-            var locals = {
-                title: 'Brandply questionnaire: results',
-                data: data,
-                error: data.length ? null : "No questionnaire answers yet."
-            }
-            res.render('results', locals);
+            res.json(data);
         },
         function (reason) { // отказ  
             next(reason);

@@ -16,7 +16,7 @@ module.exports = function(app) {
     app.engine('ejs', engine);
     app.set('view engine', 'ejs');
     // middleware
-    app.use(bodyParser.urlencoded({ extended: false }));
+    app.use(bodyParser.json());
     app.use(expressValidator()); // this line must be immediately after any of the bodyParser middlewares! 
     app.use(express.static('public'));
     app.use(logger);
@@ -30,7 +30,7 @@ module.exports = function(app) {
     //     response.render('form', { title: 'Brandply questionnaire: answer the questions' });
     // });
 
-    app.post('/api/submitForm', submitForm);
+    app.route('/api/submitForm').post(submitForm);
 
     app.get('/api/results', viewResult);
 

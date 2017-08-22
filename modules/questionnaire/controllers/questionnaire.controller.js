@@ -4,22 +4,25 @@ angular.module('questionnaire')
             $scope.formData={};
 
             $scope.submit = function() {
+                $scope.formData.codeQuality = $scope.slider.getValue();
+                var sprintCodeQuality = getSprintCodeQuaility($scope.formData.codeQuality, $scope.formData.lengthOfSprint);
+                var questionRating = getQuestionRating(sprintCodeQuality, getKPI($scope.formData.bestDev));
 
-                // form.serializeArray().map(function(x) { formData[x.name] = x.value; });
-
-                // var sprintCodeQuality = getSprintCodeQuaility(formData.codeQuality, formData.lengthOfSprint);
-                // var questionRating = getQuestionRating(sprintCodeQuality, getKPI(formData.bestDev));
-
-                // showSprintStatus(questionRating, '#sprintStatus');
+                showSprintStatus(questionRating, '#sprintStatus');
 
                 $http.post('api/submitForm', $scope.formData)
                     .then(function() {
                         $('.alert-success').show();
-                        // form[0].reset();
+                        $scope.formData= {};
                     },
                     function() {
                         $('.alert-danger').show();
                         console.log('Error sending the form')
                     });
             };
+
+            $scope.slider = new Slider("#codeQuality", {
+                min: 1,
+                max: 10
+            });
         }]);

@@ -26,7 +26,7 @@ module.exports = function(app) {
 
     app.route('/api/results').get(viewResult);
 
-    app.route('/tests').get(function(req, res) {
+    app.route('/tests').get((req, res) =>{
         res.sendFile(path.resolve('public/SpecRunner.html'));
     });
 

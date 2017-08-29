@@ -48,3 +48,8 @@ body {
 .container .text-muted {
   margin: 20px 0;
 }
+
+div.error {
+  max-width: 400px;
+}
+

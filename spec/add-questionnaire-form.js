@@ -9,7 +9,7 @@ const _ec = protractor.ExpectedConditions,
 let questionnairePage = new QuestionnairePage(defaultWaitTime);
 
 
-describe('Add questionnaire', () =>{
+describe('Add questionnaire form', () =>{
     
     beforeAll(() =>{
         questionnairePage.getPage();
@@ -44,4 +44,13 @@ describe('Add questionnaire', () =>{
 
         expect(questionnairePage.successMessageDiv.isDisplayed()).toBeTruthy();
     });
+
+    it('Should show sprint status on successful form submission', () => {
+        questionnairePage.fillForm();
+
+        questionnairePage.submit();
+
+        expect(questionnairePage.sprintStatusDiv.isDisplayed()).toBeTruthy();
+    });
+
 });

@@ -1,4 +1,4 @@
-let specs = '../spec/';
+let specs = ['add-questionnaire-form.js', 'get-results.js'];
 let data = {
     mainSiteUrl: 'http://localhost:8080'
 };
@@ -6,7 +6,7 @@ let data = {
 exports.config = {
     framework: 'jasmine2',
     seleniumAddress: 'http://localhost:4444/wd/hub',
-    specs: [specs + 'spec.js'],
+    specs: specs.map((value) => { return '../spec/' + value }),
     capabilities: {
         browserName: 'chrome'
     },
@@ -22,5 +22,5 @@ exports.config = {
         browser.configuration = data;
         browser.driver.manage().window().maximize();
     },
-    defaultWaitTime: 3000
+    defaultWaitTime: 1000
 }

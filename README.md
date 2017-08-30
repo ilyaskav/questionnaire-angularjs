@@ -16,11 +16,15 @@ webdriver-manager start
 ## Running tests
 Make sure selenium server is running, clone and open the current project. Run the following commands from the project folder:
 
-1. Start questionnaire application
+1. Install all required node packages
+```
+npm install
+```
+2. Start questionnaire application
 ```
 node app
 ```
-2. Run tests (chrome browser required as it set by default, although you can change it in config file)
+3. Run tests (chrome browser required as it set by default, although you can change it in config file)
 ```
 protractor config/protractor.conf.js
 ```

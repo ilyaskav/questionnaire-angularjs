@@ -4,10 +4,10 @@ var path = require('path');
 var fs = require('fs');
 var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
-var lib = path.join(path.dirname(fs.realpathSync(__filename)), '../public/script/server');
+var lib = path.join(path.dirname(fs.realpathSync(__filename)), '../modules/questionnaire/server');
 var logger = require(lib + '/logger.js');
 var exHandler = require(lib + '/exception-handler.js');
-var submitForm = require(lib + '/submit-form.server.js');
+var api = require(lib + '/questionnaire.server.js');
 var viewResult = require(lib + '/view-result.server.js');
 
 
@@ -22,7 +22,7 @@ module.exports = function(app) {
     app.use(logger);
 
 
-    app.route('/api/submitForm').post(submitForm);
+    app.route('/api/submitForm').post(api.add);
 
     app.route('/api/results').get(viewResult);
 

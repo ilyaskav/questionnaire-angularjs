@@ -15,5 +15,7 @@ app.config(function($routeProvider) {
         .when("/results", {
             templateUrl: "questionnaire/templates/results.tpl.html",
             controller: "ResultsController"
-        });
+        })
+        .when('/404', { templateUrl: 'questionnaire/templates/404.error.tpl.html' })
+        .otherwise({ redirectTo: '/404' })
 });

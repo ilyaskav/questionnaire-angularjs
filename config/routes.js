@@ -8,11 +8,11 @@ var lib = path.join(path.dirname(fs.realpathSync(__filename)), '../modules/quest
 var logger = require(lib + '/logger.js');
 var exHandler = require(lib + '/exception-handler.js');
 var api = require(lib + '/questionnaire.server.js');
-var viewResult = require(lib + '/view-result.server.js');
+// var viewResult = require(lib + '/view-result.server.js');
 
 
 module.exports = function(app) {
-    app.set('views', path.join(__dirname, '../public/views'));
+    app.set('views', path.join(__dirname, '../public'));
     app.engine('ejs', engine);
     app.set('view engine', 'ejs');
     // middleware
@@ -24,7 +24,7 @@ module.exports = function(app) {
 
     app.route('/api/submitForm').post(api.add);
 
-    app.route('/api/results').get(viewResult);
+    app.route('/api/results').get(api.list);
 
     app.route('/tests').get((req, res) =>{
         res.sendFile(path.resolve('public/SpecRunner.html'));
@@ -36,7 +36,7 @@ module.exports = function(app) {
     app.use(express.static('modules'));
 
     app.route('/*').get((req, res) =>{
-        res.render('index', { title: 'Brandply questionnaire' });
+        res.render('layout', { title: 'Brandply questionnaire' });
     });
 
     app.use(exHandler);

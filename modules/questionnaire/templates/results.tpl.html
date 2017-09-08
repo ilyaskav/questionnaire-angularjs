@@ -3,7 +3,7 @@
 <p class="bg-warning" ng-hide="answers.length">No questionnaire answers yet.</p>
 
 <div class="answer" ng-repeat="answer in answers" >
-    <span>Reply by <em> {{answer.name}} </em> on  {{answer.date}}:</span>
+    <span>Reply by <em> {{answer.name}} </em> on  {{ answer.created }}:</span>
     <div class="well">
 
         <dl class="dl-horizontal">

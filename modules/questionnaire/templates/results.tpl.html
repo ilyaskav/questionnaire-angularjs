@@ -8,24 +8,34 @@
 
         <dl class="dl-horizontal">
             <dt>Code Quality</dt>
-            <dd>
-                {{answer.codeQuality}}
-            </dd>
+            <dd> {{answer.codeQuality}} </dd>
 
             <dt>Best Developer</dt>
-            <dd>
-                {{answer.bestDev}}
-            </dd>
+            <dd> {{answer.bestDev}} </dd>
 
             <dt>Suggestions</dt>
-            <dd>
-                {{answer.suggestions}}
-            </dd>
+            <dd> {{answer.suggestions}} </dd>
 
             <dt>Length of sprint</dt>
-            <dd>
-                {{answer.lengthOfSprint}}
-            </dd>
+            <dd> {{answer.lengthOfSprint}} </dd>
         </dl>
     </div>
 </div>
+
+<nav aria-label="Page navigation" ng-show="answers.length">
+    <span class="pagination">Showing {{ pagination.from }} to {{ pagination.to }} of {{ pagination.total }}</span>
+    <ul class="pagination pull-right">
+        <li ng-class="{ disabled: pagination.page === 1}">
+            <a href="#" aria-label="Previous" ng-click="prev()">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li ng-class="{ 'active': pagination.page === ($index + 1) }" ng-repeat="page in pagination.pages">
+            <a href="#" ng-click="getAnswers($index + 1)" >{{ $index + 1 }}</a></li>
+        <li ng-class="{ disabled: pagination.pagesTotal === pagination.page }">
+            <a href="#" aria-label="Next" ng-click="next()">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>

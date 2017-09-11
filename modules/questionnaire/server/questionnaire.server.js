@@ -25,11 +25,35 @@ exports.add = (req, res) => {
 };
 
 exports.list = (req, res, next) => {
-    Questionnaire.find({}).exec((err, result) => {
-        if (err) {
-            next(err);
-        }
+    let show = 5,
+        page = req.query.page ? parseInt(req.query.page) : 1,
+        skip = show * (page - 1),   
+        from = skip + 1,
+        to = from + show - 1,        
+        pagination = {page};
 
-        res.json(result);
+    Questionnaire.count().exec((err, totalCount) => {
+        let aggregationQuery = [
+            { $sort: { created: 1 } },
+            { $skip: skip },
+            { $limit: show }
+        ];
+
+        Questionnaire.aggregate(aggregationQuery).exec((err, result) => {
+            if (err) {
+                next(err);
+            }
+
+            pagination.total = totalCount;
+            pagination.from = result ? from : 0;            
+            pagination.to = result ? (totalCount <= to ? totalCount : to) : 0;
+            pagination.pagesTotal = Math.ceil(totalCount / show);
+
+            if (pagination.pagesTotal <= 6){
+                pagination.pages = Array.from(Array(pagination.pagesTotal + 1).keys()).slice(1);
+            }
+
+            res.json({ answers: result, pagination: pagination });
+        });
     });
 };

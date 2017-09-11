@@ -53,3 +53,6 @@ div.error {
   max-width: 400px;
 }
 
+.answer:last-of-type .well{
+  margin-bottom: 0; 
+}

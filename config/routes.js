@@ -30,9 +30,6 @@ module.exports = function(app) {
         res.sendFile(path.resolve('public/SpecRunner.html'));
     });
 
-    // app.use(function(req, res, next) {
-    //     res.render('err/404', { title: 'Page was not found' });
-    // });
     app.use(express.static('modules'));
 
     app.route('/*').get((req, res) =>{

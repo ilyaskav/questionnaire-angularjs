@@ -34,7 +34,7 @@ exports.list = (req, res, next) => {
 
     Questionnaire.count().exec((err, totalCount) => {
         let aggregationQuery = [
-            { $sort: { created: 1 } },
+            { $sort: { created: -1 } },
             { $skip: skip },
             { $limit: show }
         ];

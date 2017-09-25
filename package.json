@@ -18,5 +18,13 @@
     "jasmine-spec-reporter": "^4.2.1",
     "moment": "^2.18.1",
     "mongoose": "^4.11.10"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-uglify": "^3.1.0",
+    "grunt-contrib-watch": "^1.0.0"
   }
 }

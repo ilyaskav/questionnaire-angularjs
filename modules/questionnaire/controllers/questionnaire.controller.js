@@ -1,37 +1,15 @@
+/*global Slider, getSprintCodeQuaility, getQuestionRating, showSprintStatus, getKPI */
+'use strict';
 angular.module('questionnaire')
     .controller('QuestionnaireController', ['$scope', '$http',
         function($scope, $http) {
             $scope.formData = {};
             $scope.error = null;
             $scope.submitted = false;
-
-            $scope.submit = function() {
-                $scope.submitted = true;
-                $scope.formData.codeQuality = $scope.slider.getValue();
-
-                if (!validate()) return;
-
-                var sprintCodeQuality = getSprintCodeQuaility($scope.formData.codeQuality, $scope.formData.lengthOfSprint);
-                var questionRating = getQuestionRating(sprintCodeQuality, getKPI($scope.formData.bestDev));
-
-                showSprintStatus(questionRating, '#sprintStatus');
-
-                $http.post('api/submitForm', $scope.formData)
-                    .then(function() {
-                        $('.alert-success').show();
-                        $scope.formData = {};
-                        $scope.submitted = false;                        
-                    },
-                    function() {
-                        $('.alert-danger').show();
-                        console.log('Error sending the form')
-                    });
-            };
-
-            $scope.clear = function (){
-                $scope.submitted = false;
-                $scope.error = null;
-            }
+            $scope.slider = new Slider('#codeQuality', {
+                min: 1,
+                max: 10
+            });
 
             function validate() {
                 $scope.error = null;
@@ -59,8 +37,31 @@ angular.module('questionnaire')
                 return true;
             }
 
-            $scope.slider = new Slider("#codeQuality", {
-                min: 1,
-                max: 10
-            });
+            $scope.submit = function() {
+                $scope.submitted = true;
+                $scope.formData.codeQuality = $scope.slider.getValue();
+
+                if (!validate()) return;
+
+                var sprintCodeQuality = getSprintCodeQuaility($scope.formData.codeQuality, $scope.formData.lengthOfSprint);
+                var questionRating = getQuestionRating(sprintCodeQuality, getKPI($scope.formData.bestDev));
+
+                showSprintStatus(questionRating, '#sprintStatus');
+
+                $http.post('api/submitForm', $scope.formData)
+                    .then(function() {
+                        $('.alert-success').show();
+                        $scope.formData = {};
+                        $scope.submitted = false;                        
+                    },
+                    function() {
+                        $('.alert-danger').show();
+                        console.log('Error sending the form');
+                    });
+            };
+
+            $scope.clear = function (){
+                $scope.submitted = false;
+                $scope.error = null;
+            };
         }]);

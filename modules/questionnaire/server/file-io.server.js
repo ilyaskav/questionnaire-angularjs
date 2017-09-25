@@ -1,3 +1,5 @@
+'use strict';
+
 var fs = require('fs');
 
 var writeAnswer = function (data, filename, separator) {
@@ -6,12 +8,12 @@ var writeAnswer = function (data, filename, separator) {
     
     fs.open('data/'+filename, 'a', (err, fd) => {
       if (err) {
-        reject("can't open the file");
+        reject('can\'t open the file');
         return;
       }
       fs.appendFile(fd, JSON.stringify(data, null) + separator, (err) => {
         if (err) {
-          reject("can't append to a file");
+          reject('can\'t append to a file');
         }
         fs.close(fd);
         resolve('The data was appended to file!');
@@ -53,4 +55,4 @@ var readAnswers = function () {
 module.exports = {
   writeObj: writeAnswer,
   readObj: readAnswers
-}
+};

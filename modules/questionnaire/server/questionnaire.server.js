@@ -1,5 +1,8 @@
+'use strict';
+
 var mongoose = require('mongoose');
 var moment = require('moment');
+var util = require('util');
 var Questionnaire = mongoose.model('Questionnaire');
 
 exports.add = (req, res) => {

@@ -16,7 +16,7 @@ module.exports = function(grunt) {
             },
             dist: {
                 // the files to concatenate
-                src: ['modules/**/controllers/*.js', 'tmp/*.js'],
+                src: ['modules/questionnaire/app.js','modules/**/controllers/*.js', 'tmp/*.js'],
                 // the location of the resulting JS file
                 dest: 'dist/<%= pkg.name %>.js'
             }
@@ -24,7 +24,8 @@ module.exports = function(grunt) {
         uglify: {
             options: {
                 // the banner is inserted at the top of the output
-                banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+                banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n',
+                mangle: false
             },
             dist: {
                 files: {
@@ -52,10 +53,6 @@ module.exports = function(grunt) {
                 }
             }
         },
-        // watch: {
-        //     files: ['<%= jshint.files %>'],
-        //     tasks: ['jshint']
-        // }
         watch: {
             dev: {
                 files: ['Gruntfile.js', 'modules/**/*.js', 'modules/**/*.html'],
@@ -71,6 +68,23 @@ module.exports = function(grunt) {
                     atBegin: true
                 }
             }
+        },
+        nodemon: {
+            dev: {
+                script: 'app.js',
+                options: {
+                    nodeArgs: ['--inspect'],
+                    ext: 'js,html',
+                    watch: ['modules/**/server', 'config', 'dist']
+                }
+            }
+        },
+        concurrent: {
+            default: ['nodemon:dev', 'watch:dev'],
+            min: ['nodemon:dev', 'watch:min'],
+            options: {
+                logConcurrentOutput: true
+            }
         }
     });
 
@@ -80,10 +94,12 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-nodemon');
+    grunt.loadNpmTasks('grunt-concurrent');
 
     // this would be run by typing "grunt test" on the command line
-    grunt.registerTask('minified', ['watch:min']);
+    grunt.registerTask('minified', ['concurrent:min']);
 
     // the default task can be run just by typing "grunt" on the command line
-    grunt.registerTask('default', ['watch:dev']);
+    grunt.registerTask('default', ['concurrent']);
 };

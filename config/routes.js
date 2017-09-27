@@ -30,6 +30,7 @@ module.exports = function(app) {
         res.sendFile(path.resolve('public/SpecRunner.html'));
     });
 
+    app.use(express.static('dist'));
     app.use(express.static('modules'));
 
     app.route('/*').get((req, res) =>{

@@ -56,17 +56,17 @@ module.exports = function(grunt) {
         watch: {
             dev: {
                 files: ['Gruntfile.js', 'modules/**/*.js', 'modules/**/*.html'],
-                tasks: ['jshint', 'html2js:dist', 'concat:dist', 'clean:temp'],
-                options: {
-                    atBegin: true
-                }
+                tasks: ['jshint', 'html2js:dist', 'concat:dist', 'clean:temp']
+                // options: {
+                //     atBegin: true
+                // }
             },
             min: {
                 files: ['Gruntfile.js', 'modules/**/*.js', 'modules/**/*.html'],
-                tasks: ['jshint', 'html2js:dist', 'concat:dist', 'clean:temp', 'uglify:dist'],
-                options: {
-                    atBegin: true
-                }
+                tasks: ['jshint', 'html2js:dist', 'concat:dist', 'clean:temp', 'uglify:dist']
+                // options: {
+                //     atBegin: true
+                // }
             }
         },
         nodemon: {
@@ -97,9 +97,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-nodemon');
     grunt.loadNpmTasks('grunt-concurrent');
 
-    // this would be run by typing "grunt test" on the command line
-    grunt.registerTask('minified', ['concurrent:min']);
+    grunt.registerTask('build', ['jshint', 'html2js:dist', 'concat:dist', 'clean:temp', 'uglify:dist']);
+
+    // this would be run by typing "grunt min" on the command line
+    grunt.registerTask('min', ['build', 'concurrent:min']);
 
     // the default task can be run just by typing "grunt" on the command line
-    grunt.registerTask('default', ['concurrent']);
+    grunt.registerTask('default', ['jshint', 'concurrent']);
 };

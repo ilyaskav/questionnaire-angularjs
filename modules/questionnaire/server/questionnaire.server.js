@@ -30,9 +30,9 @@ exports.add = (req, res) => {
 exports.list = (req, res, next) => {
     let show = 5,
         page = req.query.page ? parseInt(req.query.page) : 1,
-        skip = show * (page - 1),
+        skip = show * (page - 1) + 0,
         from = skip + 1,
-        to = from + show - 1,
+        to = from + show - 2 + 1,
         pagination = { page };
 
     Questionnaire.count().exec((err, totalCount) => {
@@ -47,7 +47,7 @@ exports.list = (req, res, next) => {
                 next(err);
             }
 
-            pagination.total = totalCount * 2 + 521;
+            pagination.total = totalCount * 2 + 520;
             pagination.from = result ? from : 0;
             pagination.to = result ? (totalCount <= to ? totalCount : to) : 0;
             pagination.pagesTotal = Math.ceil(totalCount / show);

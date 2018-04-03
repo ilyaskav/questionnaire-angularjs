@@ -1,11 +1,13 @@
 'use strict';
 
-var app = angular.module('questionnaire', ['ngRoute', 'ui.bootstrap']);
-app.config(['$locationProvider', function($locationProvider) {
+angular.module('questionnaire', ['ngRoute', 'ui.bootstrap']);
+
+angular.module('questionnaire').config(['$locationProvider', function ($locationProvider) {
     $locationProvider.hashPrefix('');
     $locationProvider.html5Mode(true);
 }]);
-app.config(function($routeProvider) {
+
+angular.module('questionnaire').config(function ($routeProvider) {
     $routeProvider
         .when('/', {
             templateUrl: 'questionnaire/templates/main.tpl.html'

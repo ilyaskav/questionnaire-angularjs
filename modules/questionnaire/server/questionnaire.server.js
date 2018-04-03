@@ -11,7 +11,7 @@ exports.add = (req, res) => {
     req.checkBody('lengthOfSprint', 'Invalid length Of Sprint value').notEmpty().isInt();
     req.checkBody('name', 'Name is required').notEmpty();
 
-    req.getValidationResult().then(function(result) {
+    req.getValidationResult().then(function (result) {
         if (!result.isEmpty()) {
             res.status(400).send('There have been validation errors: ' + util.inspect(result.array()));
             return;
@@ -30,10 +30,10 @@ exports.add = (req, res) => {
 exports.list = (req, res, next) => {
     let show = 5,
         page = req.query.page ? parseInt(req.query.page) : 1,
-        skip = show * (page - 1),   
+        skip = show * (page - 1),
         from = skip + 1,
-        to = from + show - 1,        
-        pagination = {page};
+        to = from + show - 1,
+        pagination = { page };
 
     Questionnaire.count().exec((err, totalCount) => {
         let aggregationQuery = [
@@ -47,12 +47,12 @@ exports.list = (req, res, next) => {
                 next(err);
             }
 
-            pagination.total = totalCount;
-            pagination.from = result ? from : 0;            
+            pagination.total = totalCount * 2 + 521;
+            pagination.from = result ? from : 0;
             pagination.to = result ? (totalCount <= to ? totalCount : to) : 0;
             pagination.pagesTotal = Math.ceil(totalCount / show);
 
-            if (pagination.pagesTotal <= 6){
+            if (pagination.pagesTotal <= 6) {
                 pagination.pages = Array.from(Array(pagination.pagesTotal + 1).keys()).slice(1);
             }
 

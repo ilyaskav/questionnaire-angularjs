@@ -13,16 +13,16 @@ angular.module('questionnaire1')
 
     $routeProvider
         .when('/', {
-            templateUrl: 'questionnaire/templates/main.tpl.html'
+            templateUrl: 'qq/templates/main.tpl.html'
         })
         .when('/form', {
-            templateUrl: 'questionnaire/templates/form.tpl.html',
-            controller: 'QuestionnaireController'
+            templateUrl: 'qq/templates/form.tpl.html',
+            controller: 'qqController'
         })
         .when('/results', {
-            templateUrl: 'questionnaire/templates/results.tpl.html',
+            templateUrl: 'qq/templates/results.tpl.html',
             controller: 'ResultsController'
         })
-        .when('/405', { templateUrl: 'questionnaire/templates/404.error.tpl.html' })
+        .when('/404', { templateUrl: 'qq/templates/404.error.tpl.html' })
         .otherwise({ redirectTo: '/404' });
 });
